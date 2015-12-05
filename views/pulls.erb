@@ -17,38 +17,21 @@
     <% unless @pulls.empty? %>
     <% @pulls.each do |org, pulls| %>
       <h3><%= "#{org}" %></h3>
+      <h4> There are <%= pulls.length %> currently open pull-requests.</h3>
       <table class="u-full-width">
         <thead>
           <tr>
-            <th>
-              <div class="icon-container">
-                <span class="icon merge" tilte="Merge">Merge</span>
-                <span class="icon review" tilte="Review">Review</span>
-                <span class="icon comment" tilte="Comment">Comment</span>
-              </div>
-            </th>
             <th><span>Name</span></th>
             <th><span>Repo</span></th>
             <th><span>Author</span></th>
             <th><span>Last Update</span></th>
+            <th><span>Comment Count</span></th>
           </tr>
         </thead>
         <tbody>
           <% pulls.each_with_index do |pull, i| %>
           <% delay = i * 0.5 %>
             <tr>
-              <td>
-                <div class="icon-container">
-                  <span
-                    class="icon alpha loading"
-                    style="animation-delay: <%= delay %>s; -webkit-animation-delay: <%= delay %>s"
-                    title="Loading..."
-                    data-org="<%= pull[:org] %>"
-                    data-repo="<%= pull[:repo] %>"
-                    data-number="<%= pull[:number] %>"
-                  >Loading...</span>
-                </div>
-              </td>
               <td>
                 <a href="<%= pull[:html_url] %>">
                   <%= pull[:title] %>
@@ -65,6 +48,7 @@
                 </a>
               </td>
               <td><%= pull[:updated_at].strftime('%d %B %Y') %></td>
+              <td><%= pull[:comments] %></td>
             </tr>
           <% end %>
         </tbody>
@@ -74,13 +58,6 @@
       <table class="u-full-width">
         <thead>
           <tr>
-            <th>
-              <div class="icon-container">
-                <span class="icon merge">Merge</span>
-                <span class="icon review">Review</span>
-                <span class="icon comment">Comment</span>
-              </div>
-            </th>
             <th><span>Name</span></th>
             <th><span>Repo</span></th>
             <th><span>Author</span></th>
