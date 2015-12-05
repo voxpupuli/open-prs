@@ -23,6 +23,7 @@
             <th><span>Author</span></th>
             <th><span>Last Update</span></th>
             <th><span>Comment Count</span></th>
+            <th><span>Labels</span></th>
           </tr>
         </thead>
         <tbody>
@@ -46,6 +47,11 @@
               </td>
               <td><%= pull[:updated_at].strftime('%d %B %Y') %></td>
               <td><%= pull[:comments] %></td>
+              <td>
+              <% pull[:labels].each do |label| %>
+                <p style="color: #<%= label[:color] %>"><%= label[:name] %></p>
+              <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
