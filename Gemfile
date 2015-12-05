@@ -11,7 +11,7 @@ gem 'httparty'
 gem 'faraday-http-cache'
 gem 'puma'
 
-group :developmnet do
+group :development do
   gem 'netrc'
   gem 'pry'
 end
