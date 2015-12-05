@@ -34,8 +34,10 @@ module Helpers
   def set_client
     begin
       if settings.development?
+        Octokit.auto_paginate = true
         client = Octokit::Client.new(:netrc => true)
       else
+        Octokit.auto_paginate = true
         client = Octokit::Client.new(access_token: session[:token])
       end
     rescue => e
