@@ -21,13 +21,8 @@ get '/' do
     client = set_client
     # user_login = client.user.login
     user_login = session[:user]
-    orgs = client.orgs << { login: user_login }
-    users_orgs = orgs.map { |o| "user:#{o[:login]}"}.join(' ')
-    query = "#{users_orgs} is:pr is:open -involves:#{user_login}"
+    query = "user:puppet-community is:pr is:open created:>2014-01-01"
     issues = [Thread.new { client.search_issues(query).items }]
-    issues << Thread.new {
-      client.search_issues("involves:#{user_login} is:pr is:open").items
-    }
     url_regex = /.+repos\/(?<org>.+)\/(?<repo>.+)\/pulls\/(?<number>\d+)/
     @pulls = issues.flat_map { |issue|
       issue.value.each { |pull|
@@ -42,8 +37,7 @@ get '/' do
     }.group_by { |p|
       p[:org]
     }
-
-     erb :'pulls'
+    erb :'pulls'
   else
     erb :'login'
   end
