@@ -18,7 +18,6 @@ module Helpers
       :client_id => ENV["GITHUB_APP_ID"],
       :redirect_uri => "#{app_root}/auth.callback",
       :state => state,
-      :scope => 'public_repo'
     }.map{|k,v|
       "#{k}=#{URI.encode(v)}"
     }.join("&")
