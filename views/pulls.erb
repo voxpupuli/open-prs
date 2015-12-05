@@ -14,7 +14,8 @@
     <% @pulls.each do |org, pulls| %>
       <h3><%= "#{org}" %></h3>
       <h4> There are <%= pulls.length %> currently open pull-requests.</h3>
-      <table class="u-full-width">
+      <p>Click on a heading to sort ascending or descending</p>
+      <table id="pr-table" class="u-full-width tablesorter">
         <thead>
           <tr>
             <th><span>Name</span></th>

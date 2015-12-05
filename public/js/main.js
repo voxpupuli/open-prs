@@ -1,1 +1,5 @@
-// Empty for now...
+$(document).ready(function()
+    {
+        $("#pr-table").tablesorter();
+    }
+);
