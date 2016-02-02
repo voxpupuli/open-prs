@@ -14,6 +14,8 @@ module Helpers
   end
 
   def github_oath_path(state)
+    error_and_back 'You forgot to set ENV variables' if ENV["GITHUB_APP_ID"].to_s.nil?
+
     query = {
       :client_id => ENV["GITHUB_APP_ID"],
       :redirect_uri => "#{app_root}/auth.callback",
