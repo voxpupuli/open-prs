@@ -5,7 +5,7 @@ A simple Sinatra APP to check open Pull Requests the Puppet-Community namespace.
 It's heavily based on the [junkie](https://github.com/leomilrib/junkie) app. It's awesome, go check it out!
 
 ## Using it
-You can use it by [accessing the herokuapp](http://puppet-community-open-prs.herokuapp.com/).
+You can use it by [accessing the herokuapp](http://voxpupuli-open-prs.herokuapp.com/).
 
 ## Getting your own
 You can run it on your machine or sever by follwing this steps:

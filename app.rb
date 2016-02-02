@@ -21,7 +21,7 @@ get '/' do
     client = set_client
     # user_login = client.user.login
     user_login = session[:user]
-    query = "user:puppet-community is:pr is:open created:>2014-01-01"
+    query = "user:voxpupuli is:pr is:open created:>2014-01-01"
     issues = [Thread.new { client.search_issues(query).items }]
     url_regex = /.+repos\/(?<org>.+)\/(?<repo>.+)\/pulls\/(?<number>\d+)/
     @pulls = issues.flat_map { |issue|
