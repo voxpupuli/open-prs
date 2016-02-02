@@ -13,20 +13,6 @@ module Helpers
     Digest::MD5.hexdigest "#{Time.now.to_i}unguessable random string#{rand}"
   end
 
-  def github_oath_path(state)
-    error_and_back 'You forgot to set ENV variables' if ENV["GITHUB_APP_ID"].to_s.nil?
-
-    query = {
-      :client_id => ENV["GITHUB_APP_ID"],
-      :redirect_uri => "#{app_root}/auth.callback",
-      :state => state,
-    }.map{|k,v|
-      "#{k}=#{URI.encode(v)}"
-    }.join("&")
-
-    "https://github.com/login/oauth/authorize?#{query}"
-  end
-
   def error_and_back(error)
     session[:error] = error.to_s
     redirect '/'
@@ -39,7 +25,7 @@ module Helpers
         client = Octokit::Client.new(:netrc => true)
       else
         Octokit.auto_paginate = true
-        client = Octokit::Client.new(access_token: session[:token])
+        client = Octokit::Client.new(access_token: ENV['OPEN_PR_ACCESS_TOKEN'])
       end
     rescue => e
       error_and_back 'GitHub auth error...'
