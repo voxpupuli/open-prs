@@ -22,10 +22,11 @@ You can run it on your machine or sever by follwing this steps:
  -  `bundle exec ruby app.rb`
 
 ### Running on a Heroku app
+ - [Get a GitHub API token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/)
  - `git clone <this repo>`
  - `bundle install`
  - `git remote add heroku <<Your Heroku app URL>>`
- - `heroku config:set OPEN_PR_ACCESS_TOKEN=<<Add your SESSION_SECRET to Heroku app>>`
+ - `heroku config:set OPEN_PR_ACCESS_TOKEN=<<Add your Github Access Token to Heroku app>>`
  - `git push heroku master`
  - `heroku open`
 
