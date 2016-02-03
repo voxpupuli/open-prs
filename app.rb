@@ -43,29 +43,29 @@ get '/pulls' do
   erb :'pulls'
 end
 
-get '/about' do
-  erb :'about'
+get '/issues' do
+  client = set_client
+  # user_login = client.user.login
+  user_login = session[:user]
+  query = "user:voxpupuli is:issue is:open created:>2014-01-01"
+  issues = [Thread.new { client.search_issues(query).items }]
+  url_regex = /.+repos\/(?<org>.+)\/(?<repo>.+)\/issues\/(?<number>\d+)/
+  @issues = issues.flat_map { |issue|
+    issue.value.each { |issue|
+      captures = issue.url.match(url_regex)
+      issue[:org] = captures[:org]
+      issue[:repo] = captures[:repo]
+      issue[:number] = captures[:number]
+    }
+  }
+  @issues = @issues.sort_by { |p|
+    p[:org]
+  }.group_by { |p|
+    p[:org]
+  }
+  erb :'issues'
 end
 
-get '/pull_icons' do
-  pull = {}
-  client = set_client
-  pull[:issue_comments] = begin
-     client.issue_comments(
-      "#{params[:org]}/#{params[:repo]}",
-      "#{params[:number]}"
-    )
-  rescue
-     []
-  end
-  pull[:pull_comments] = begin
-    client.pull_comments(
-      "#{params[:org]}/#{params[:repo]}",
-      "#{params[:number]}"
-    )
-  rescue
-    []
-  end
-
-  erb :'_pull_icons', layout: false, locals: { pull: pull }
+get '/about' do
+  erb :'about'
 end

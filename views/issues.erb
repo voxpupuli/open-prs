@@ -1,0 +1,85 @@
+<h1>Vox Pupuli Open Issues</h1>
+
+<div class="row">
+  <div class="twelve columns">
+    <% unless @issues.empty? %>
+    <% @issues.each do |org, issues| %>
+      <h3><%= "#{org}" %></h3>
+      <h4> There are <%= issues.length %> currently open issues.</h3>
+      <p>Click on a heading to sort ascending or descending</p>
+      <table id="pr-table" class="u-full-width tablesorter">
+        <thead>
+          <tr>
+            <th><span>Name</span></th>
+            <th><span>Repo</span></th>
+            <th><span>Author</span></th>
+            <th><span>Last Update</span></th>
+            <th><span>Comment Count</span></th>
+            <th><span>Labels</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% issues.each_with_index do |issue, i| %>
+          <% delay = i * 0.5 %>
+            <tr>
+              <td>
+                <a href="<%= issue[:html_url] %>">
+                  <%= issue[:title] %>
+                </a>
+              </td>
+              <td>
+                <a href="<%= "https://github.com/#{issue[:org]}/#{issue[:repo]}" %>">
+                  <%= "#{issue[:repo]}" %>
+                </a>
+              </td>
+              <td>
+                <a href="<%= issue[:user][:html_url] %>">
+                  <%= issue[:user][:login] %>
+                </a>
+              </td>
+              <td><%= issue[:updated_at].strftime('%d %B %Y') %></td>
+              <td><%= issue[:comments] %></td>
+              <td>
+              <% issue[:labels].each do |label| %>
+                <p style="color: #<%= label[:color] %>"><%= label[:name] %></p>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <% else %>
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th><span>Name</span></th>
+            <th><span>Repo</span></th>
+            <th><span>Author</span></th>
+            <th><span>Last Update</span></th>
+            <th><span>Last Update</span></th>
+            <th><span>Comment Count</span></th>
+            <th><span>Labels</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5">
+              <div class="center">
+                <p>Nothing to show for now...</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve colunm center">
+    <footer>
+      <a href="/about">about this app</a>
+    </footer>
+  </div>
+</div>
