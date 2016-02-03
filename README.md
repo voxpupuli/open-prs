@@ -1,6 +1,6 @@
-# puppet-community-open-prs
+# Vox Pupuli Open PRs
 
-A simple Sinatra APP to check open Pull Requests the Puppet-Community namespace.
+A simple Sinatra APP to check open Pull Requests the Vox Pupuli namespace.
 
 It's heavily based on the [junkie](https://github.com/leomilrib/junkie) app. It's awesome, go check it out!
 
