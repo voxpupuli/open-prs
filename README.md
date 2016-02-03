@@ -14,11 +14,13 @@ You can run it on your machine or sever by follwing this steps:
  - `git clone <this repo>`
  - `bundle install`
  - config your `~/.netrc` file to include your GitHub authentication token:
+ 
  ```
  machine api.github.com
   login janedoe
   password hunter2
  ```
+ 
  -  `bundle exec ruby app.rb`
 
 ### Running on a Heroku app
