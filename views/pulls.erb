@@ -37,7 +37,7 @@
                   <%= pull[:user][:login] %>
                 </a>
               </td>
-              <td><%= pull[:updated_at].strftime('%d %B %Y') %></td>
+              <td><%= pull[:updated_at].strftime('%F') %></td>
               <td><%= pull[:comments] %></td>
               <td>
               <% pull[:labels].each do |label| %>
